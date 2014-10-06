@@ -45,34 +45,35 @@
 
 
 var COUNT = {
-  words: [{"text":"study","size":40}, {"text":"motion","size":15}],
+  words: [],
   buildWordCountArray: function(data){
     for(var i = 0; i < data.length; i++){
-      if(COUNT.checkIfAlreadyExists(data[i].text)){
-        COUNT.words[i].size += 5;
+      var index = COUNT.checkIfAlreadyExists(data[i].text);
+      if(index != null){
+        COUNT.words[index].size += 5;
       }else{
-        COUNT.words[i] = {};
-        COUNT.words[i].text = data[i].text;
-        COUNT.words[i].size = 10;
+        var currentWordsIndex = COUNT.words.length;
+        COUNT.words[currentWordsIndex] = {};
+        COUNT.words[currentWordsIndex].text = data[i].text;
+        COUNT.words[currentWordsIndex].size = 10;
       }
     }
     return COUNT.words;
   },
   checkIfAlreadyExists: function(word){
-    var exist = false;
+    var index = null;
     for(var i = 0; i < COUNT.words.length; i++){
       if(COUNT.words[i].text === word){
-        exist = true;
+        index = i;
       }
     }
-    return exist;
+    return index;
   }
 };
 
 
 $.getJSON("data2.json", function(data){
   var countedWords = COUNT.buildWordCountArray(data);
-  // debugger;
 
 
 
