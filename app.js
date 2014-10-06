@@ -53,9 +53,7 @@ var COUNT = {
         COUNT.words[index].size += 5;
       }else{
         var currentWordsIndex = COUNT.words.length;
-        COUNT.words[currentWordsIndex] = {};
-        COUNT.words[currentWordsIndex].text = data[i].text;
-        COUNT.words[currentWordsIndex].size = 10;
+        COUNT.words[currentWordsIndex] = {"text": data[i].text,"size": 10};
       }
     }
     return COUNT.words;
@@ -74,9 +72,6 @@ var COUNT = {
 
 $.getJSON("data2.json", function(data){
   var countedWords = COUNT.buildWordCountArray(data);
-
-
-
 
   var color = d3.scale.linear()
           // .domain([0,1,2,3,4,5,6,10,15,20,100])
